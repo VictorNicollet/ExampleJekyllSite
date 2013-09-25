@@ -1,2 +1,2 @@
-﻿source: ./site
-layouts: ../_layouts
+﻿source: .
+exclude: [run.bat]
