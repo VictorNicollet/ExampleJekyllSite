@@ -14,6 +14,6 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
   </a>
   <div class="media-body">
     <h4 class="media-heading">An example picture</h4>
-	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
   </div>
 </div>
