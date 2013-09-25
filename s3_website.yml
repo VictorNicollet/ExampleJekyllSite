@@ -6,7 +6,7 @@ max_age:
   "img/*": 6000
   "*": 300
 
-s3_endpoint: eu-west-1
+s3_endpoint: EU
 s3_reduced_redundancy: true
 
 concurrency_level: 100
