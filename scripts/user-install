@@ -1,0 +1,57 @@
+#!/usr/bin/python
+
+import os.path
+from subprocess import call
+
+##############################################################################
+# Configuration options : fill these in before executing
+##############################################################################
+
+# Source code is pulled from here
+clone = "git@github.com:VictorNicollet/ExampleJekyllSite.git"
+
+# Source code is pushed using these
+s3_id = "ID"
+s3_secret = "SECRET"
+
+#############################################################################
+# Make sure that an SSH key with no password is installed, as
+# it will be used by git for cloning
+#############################################################################
+
+home = os.environ["HOME"]
+
+if not os.path.exists(home+"/.ssh/id_rsa.pub"):
+  call(["ssh-keygen","-t","rsa","-C","jekyll-build","-q","-f",home+"/.ssh/id_rsa","-N",""])
+  print ">> Please use the following as a deploy key on your repository:\n"
+  call(["cat",home+"/.ssh/id_rsa.pub"])
+  print "\n"
+  input("Press any key to continue")
+
+#############################################################################
+# Clone the git repository
+#############################################################################
+
+if not os.path.exists(home+"/site/s3_website.yml"):
+  call(["git","clone",clone,home+"/site/"])
+
+with open(home+"/site/s3_website.yml") as config:
+  lines = config.readlines()
+
+if lines[0].startswith("s3_id"):
+  lines = lines[1:]
+
+if lines[0].startswith("s3_secret"):
+  lines = lines[1:]
+
+lines = [ "s3_id: "+s3_id+"\n", "s3_secret: "+s3_secret+"\n" ] + lines
+
+with open(home+"/site/s3_website.yml","w") as config:
+  for line in lines:
+    config.write(line)
+
+#############################################################################
+# Install the crontab
+#############################################################################
+
+call(["crontab","user-crontab"])

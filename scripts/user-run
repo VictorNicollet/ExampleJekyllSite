@@ -1,0 +1,35 @@
+#!/usr/bin/python
+
+import os
+import subprocess
+
+home = os.environ["HOME"]
+
+##############################################################################
+# Try and fetch new changes from the remote directory.
+##############################################################################
+
+os.chdir(home + "/site/")
+
+with open(".git/refs/heads/master") as headfile:
+  oldhead = headfile.read()
+
+subprocess.call(["git","pull","origin","master","-q"],stdout=subprocess.PIPE)
+
+with open(".git/refs/heads/master") as headfile:
+  newhead = headfile.read()
+
+#if oldhead == newhead:
+#  exit(0)
+
+##############################################################################
+# Changes were detected. Build the site
+##############################################################################
+
+subprocess.call(["jekyll","build"],stdout=subprocess.PIPE)
+
+##############################################################################
+# Upload the site to amazon S3
+##############################################################################
+
+subprocess.call(["s3_website","push"])

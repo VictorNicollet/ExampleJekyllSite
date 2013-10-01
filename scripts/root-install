@@ -1,0 +1,16 @@
+#!/bin/sh
+
+apt-get update -y
+
+apt-get upgrade -y
+
+apt-get install -y \
+  make \
+  ruby \
+  ruby1.9.1-dev \
+  python \
+  git \
+
+gem install \
+  jekyll \
+  s3_website

@@ -1,2 +1,2 @@
 ﻿source: .
-exclude: [run.bat]
+exclude: [run.bat,scripts,s3_website.yml]
